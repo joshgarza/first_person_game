@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbeevnr5lx51g"]
+
+[ext_resource type="PackedScene" uid="uid://dyt3j3fko8ofw" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://bci73u8so2kau" path="res://scenes/wall.tscn" id="2_yqjtg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8cj0n"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uwrxv"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="Environment" id="Environment_uwrxv"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_8cj0n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_uwrxv")
+
+[node name="player" parent="." instance=ExtResource("1_uwrxv")]
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uwrxv")
+
+[node name="wall" parent="." instance=ExtResource("2_yqjtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="wall2" parent="." instance=ExtResource("2_yqjtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="wall3" parent="." instance=ExtResource("2_yqjtg")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -10)
+
+[node name="wall4" parent="." instance=ExtResource("2_yqjtg")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 10)
