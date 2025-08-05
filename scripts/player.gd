@@ -3,7 +3,9 @@ extends CharacterBody3D
 @export var speed := 5.0
 @export var mouse_sensitivity := 0.002
 @export var gravity := 9.8
+@export var jump_velocity := 4.5
 
+var airborne := false
 var look_vertical := 0.0
 
 func _ready():
@@ -14,8 +16,8 @@ func _input(event):
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		look_vertical = clamp(look_vertical - event.relative.y * mouse_sensitivity, -PI/2, PI/2)
 		$Camera3D.rotation.x = look_vertical
-
-func _physics_process(delta):
+		
+func get_input_direction() -> Vector3:
 	var direction = Vector3.ZERO
 	var cam_xform = global_transform.basis
 
@@ -29,17 +31,28 @@ func _physics_process(delta):
 		direction += cam_xform.x
 
 	direction.y = 0
-	direction = direction.normalized()
+	return direction.normalized()
 
+func _physics_process(delta):
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	else:
 		velocity.y = 0.0
-
-	# Apply movement
-	var horizontal_velocity = direction * speed
-	velocity.x = horizontal_velocity.x
-	velocity.z = horizontal_velocity.z
+		airborne = false
+		
+	# Jump
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		velocity.y = jump_velocity
+		airborne = true
+		# Lock in horizontal momentum at jump time
+		velocity.x = get_input_direction().x * speed
+		velocity.z = get_input_direction().z * speed
 	
+	if not airborne:
+		var input_dir = get_input_direction()
+		var horizontal_velocity = input_dir * speed
+		velocity.x = horizontal_velocity.x
+		velocity.z = horizontal_velocity.z
+
 	move_and_slide()

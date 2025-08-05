@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbeevnr5lx51g"]
+[gd_scene load_steps=8 format=3 uid="uid://cbeevnr5lx51g"]
 
 [ext_resource type="PackedScene" uid="uid://dyt3j3fko8ofw" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bci73u8so2kau" path="res://scenes/wall.tscn" id="2_yqjtg"]
@@ -9,6 +9,9 @@ size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_uwrxv"]
 size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnu2h"]
+albedo_color = Color(0.158472, 0.158472, 0.158472, 1)
 
 [sub_resource type="Environment" id="Environment_uwrxv"]
 background_mode = 1
@@ -24,6 +27,7 @@ shape = SubResource("BoxShape3D_8cj0n")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_uwrxv")
+surface_material_override/0 = SubResource("StandardMaterial3D_lnu2h")
 
 [node name="player" parent="." instance=ExtResource("1_uwrxv")]
 visible = false
@@ -53,4 +57,4 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 4.0602, 0, 7.19814)
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 5.7429, 0, 4.40413)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.478876, 0.877883, 0, -0.877883, 0.478876, 3.71371, 4.60486, -13.9319)
+transform = Transform3D(-0.989313, 0.128001, -0.0698233, 0, 0.478876, 0.877883, 0.145807, 0.868501, -0.473758, 3.71371, 4.60486, -13.9319)
