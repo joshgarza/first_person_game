@@ -15,3 +15,8 @@ Thumbs.db
 # Editor-specific
 .vscode/
 .idea/
+
+addons/
+
+.editorconfig
+.gitattributes
