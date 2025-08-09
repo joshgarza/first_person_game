@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyt3j3fko8ofw"]
+[gd_scene load_steps=8 format=3 uid="uid://dyt3j3fko8ofw"]
 
 [ext_resource type="Script" uid="uid://wbvp1lqrcvkd" path="res://scripts/Player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dspb247r1xjys" path="res://scripts/Movement.gd" id="2_g2els"]
 [ext_resource type="Script" uid="uid://dxh1g1cuvb3oq" path="res://scripts/Stats.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://woqyvkiacngm" path="res://scripts/Needs.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://clvgi6mhd2qas" path="res://scripts/Interaction.gd" id="5_qlg0r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
 height = 1.0
@@ -34,3 +35,6 @@ script = ExtResource("3_qhqgy")
 
 [node name="Needs" type="Node" parent="CharacterBody3D"]
 script = ExtResource("4_dqkch")
+
+[node name="Interaction" type="Node" parent="CharacterBody3D"]
+script = ExtResource("5_qlg0r")
