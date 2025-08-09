@@ -7,9 +7,19 @@ var hunger_timer: float = 0.0
 const HUNGER_DECAY_RATE: float = 0.05  # per second
 const HUNGER_TICK_INTERVAL: float = 1.0  # seconds
 
+var thirst_timer: float = 0.0
+const THIRST_DECAY_RATE: float = 0.15  # per second
+const THIRST_TICK_INTERVAL: float = 1.0  # seconds
+
 func _process(delta: float) -> void:
 	hunger_timer += delta
 	if hunger_timer >= HUNGER_TICK_INTERVAL:
 		stats.hunger -= HUNGER_DECAY_RATE
 		stats.hunger = clamp(stats.hunger, 0, 100)
 		hunger_timer = 0.0
+
+	thirst_timer += delta
+	if thirst_timer >= THIRST_TICK_INTERVAL:
+		stats.thirst -= THIRST_DECAY_RATE
+		stats.thirst = clamp(stats.thirst, 0, 100)
+		thirst_timer = 0.0

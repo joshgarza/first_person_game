@@ -1,6 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbeevnr5lx51g"]
+[gd_scene load_steps=11 format=3 uid="uid://cbeevnr5lx51g"]
 
+[ext_resource type="Script" uid="uid://d3ic2htxagt3b" path="res://scripts/Food.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://dyt3j3fko8ofw" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cs6u1domd081j" path="res://scenes/DebugHUD.tscn" id="2_p57ef"]
 [ext_resource type="PackedScene" uid="uid://bci73u8so2kau" path="res://scenes/wall.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://b3buspk4gns62" path="res://scenes/obstacle.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dcn0tccjfuut3" path="res://scenes/food.tscn" id="4_lbhrr"]
@@ -19,6 +21,7 @@ background_mode = 1
 background_color = Color(1, 1, 1, 1)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_iywne")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -31,7 +34,7 @@ mesh = SubResource("BoxMesh_uwrxv")
 surface_material_override/0 = SubResource("StandardMaterial3D_lnu2h")
 
 [node name="player" parent="." instance=ExtResource("1_uwrxv")]
-visible = false
+transform = Transform3D(-0.999535, 0, -0.0305037, 0, 1, 0, 0.0305037, 0, -0.999535, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_uwrxv")
@@ -61,3 +64,7 @@ transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 5.7429, 0, 4.40413)
 transform = Transform3D(-0.989313, 0.128001, -0.0698233, 0, 0.478876, 0.877883, 0.145807, 0.868501, -0.473758, 3.71371, 4.60486, -13.9319)
 
 [node name="Food" parent="." instance=ExtResource("4_lbhrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.86016, 0, 0)
+
+[node name="DebugHud" parent="." node_paths=PackedStringArray("player") groups=["hud"] instance=ExtResource("2_p57ef")]
+player = NodePath("../player")

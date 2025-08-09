@@ -9,6 +9,7 @@ func _get_static_body() -> StaticBody3D:
 	return get_node_or_null("StaticBody3D") as StaticBody3D
 
 func pickup(holder: Node) -> void:
+	if has_method("on_hover_end"): on_hover_end()
 	if _held:
 		return
 	_original_parent = get_parent()
@@ -22,6 +23,7 @@ func pickup(holder: Node) -> void:
 		sb.set_deferred("collision_mask", 0)
 
 	# Reparent to hand socket, preserving world transform
+	print('reparenting')
 	var socket := holder.get_node("Hands/Socket") as Node3D
 	var keep := global_transform
 	reparent(socket)
@@ -54,9 +56,21 @@ func drop(holder: Node) -> void:
 	global_transform = t
 
 func interact(actor: Node) -> void:
-	if actor.has_node("Hands"):
-		var hands := actor.get_node("Hands") as Hands
-		if hands.has_item():
-			return
-		pickup(actor)
-		hands.set_item(self)
+	print("Holdable.interact called by: ", actor.name)
+	if not actor.has_node("Hands"):
+		push_warning("Actor has no Hands node; cannot pick up")
+		return
+
+	var hands := actor.get_node("Hands") as Hands
+	if hands == null:
+		push_error("Hands node exists but is not script-typed as Hands")
+		return
+
+	if hands.has_item():
+		print("Hands already holding something; ignoring pickup")
+		return
+
+	print("Attempting pickup…")
+	pickup(actor)
+	hands.set_item(self)
+	print("Pickup complete")

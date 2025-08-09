@@ -28,6 +28,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5432, 0)
 target_position = Vector3(0, 0, -2.5)
 collide_with_areas = true
 
+[node name="Hands" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.792375, 0.610035, 0, -0.610035, 0.792375, 0, 0.549394, -3.22715)
+script = ExtResource("6_tuyoq")
+
+[node name="Socket" type="Node3D" parent="CharacterBody3D/Hands"]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_u8vuu")
 
@@ -47,10 +53,3 @@ script = ExtResource("4_dqkch")
 
 [node name="Interaction" type="Node" parent="CharacterBody3D"]
 script = ExtResource("5_qlg0r")
-
-[node name="Hands" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.657162, -0.596945)
-script = ExtResource("6_tuyoq")
-
-[node name="Socket" type="Node3D" parent="Hands"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0762655, -0.529311)

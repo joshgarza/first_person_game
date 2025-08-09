@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs6u1domd081j"]
+
+[ext_resource type="Script" uid="uid://d3asl6s2nqomx" path="res://scripts/DebugHUD.gd" id="1_7dag4"]
+
+[node name="DebugHUD" type="CanvasLayer"]
+script = ExtResource("1_7dag4")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="hunger" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="thirst" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="health" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2

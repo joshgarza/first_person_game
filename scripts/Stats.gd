@@ -3,6 +3,7 @@ extends Node
 
 signal hunger_critical  # emitted when hunger < 20
 signal health_changed(old_value: float, new_value: float)
+signal stats_changed(hunger: float, thirst: float, health: float)
 
 var hunger := 100.0
 var thirst := 100.0
