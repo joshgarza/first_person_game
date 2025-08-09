@@ -1,8 +1,8 @@
 class_name Movement
 extends Node
 
-var player: CharacterBody3D
-var camera: Camera3D
+@onready var player: CharacterBody3D = get_parent() as CharacterBody3D
+@onready var camera: Camera3D = player.get_node("Head/Camera3D") as Camera3D
 
 @export var speed: float = 4.2
 @export var acceleration: float = 20.0

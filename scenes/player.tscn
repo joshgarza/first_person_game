@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyt3j3fko8ofw"]
+[gd_scene load_steps=9 format=3 uid="uid://dyt3j3fko8ofw"]
 
 [ext_resource type="Script" uid="uid://wbvp1lqrcvkd" path="res://scripts/Player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dspb247r1xjys" path="res://scripts/Movement.gd" id="2_g2els"]
 [ext_resource type="Script" uid="uid://dxh1g1cuvb3oq" path="res://scripts/Stats.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://woqyvkiacngm" path="res://scripts/Needs.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://clvgi6mhd2qas" path="res://scripts/Interaction.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://bvxhooo7ngdve" path="res://scripts/Hands.gd" id="6_tuyoq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
 height = 1.0
@@ -17,14 +18,22 @@ height = 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_3vyb7")
 
+[node name="Head" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5432, 0)
+
+[node name="InteractRay" type="RayCast3D" parent="CharacterBody3D/Head/Camera3D"]
+target_position = Vector3(0, 0, -2.5)
+collide_with_areas = true
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_u8vuu")
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 mesh = SubResource("CapsuleMesh_3vyb7")
-skeleton = NodePath("../Camera3D")
+skeleton = NodePath("../Head/Camera3D")
 
 [node name="Movement" type="Node" parent="CharacterBody3D"]
 script = ExtResource("2_g2els")
@@ -38,3 +47,10 @@ script = ExtResource("4_dqkch")
 
 [node name="Interaction" type="Node" parent="CharacterBody3D"]
 script = ExtResource("5_qlg0r")
+
+[node name="Hands" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.657162, -0.596945)
+script = ExtResource("6_tuyoq")
+
+[node name="Socket" type="Node3D" parent="Hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0762655, -0.529311)

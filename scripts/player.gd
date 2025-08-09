@@ -1,8 +1,10 @@
 extends CharacterBody3D
 
+@onready var head: Node3D = $Head
+@onready var hands: Hands = $Hands
 @onready var movement: Movement = $Movement
 @onready var interaction: Interaction = $Interaction
-@onready var camera: Camera3D = $Camera3D
+@onready var camera: Camera3D = $Head/Camera3D
 @onready var stats: Stats = $Stats
 @onready var needs: Needs = $Needs
 
@@ -11,6 +13,7 @@ func _ready() -> void:
 	movement.camera = camera
 	interaction.player = self
 	interaction.camera = camera
+
 	pass
 
 func _physics_process(delta: float) -> void:
