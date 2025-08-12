@@ -20,10 +20,6 @@ func _ready() -> void:
 	interaction.camera = camera
 	camera.current = true
 	camera.cull_mask = (1 << 20) - 1  # see all 20 visual layers
-	print("Camera cull_mask:", camera.cull_mask)
-
-
-	pass
 
 func _physics_process(delta: float) -> void:
 	movement._physics_process(delta)
