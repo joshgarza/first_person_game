@@ -7,8 +7,6 @@ func process_input(event: InputEvent) -> State:
 	return null
 
 func process_physics(delta: float) -> State:
-	parent.velocity.y += gravity * delta
-
 	var movement: Vector3 = get_movement_input() * walk_speed
 	
 	if movement == Vector3.ZERO:

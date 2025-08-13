@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=4 uid="uid://dyt3j3fko8ofw"]
+[gd_scene load_steps=20 format=4 uid="uid://dyt3j3fko8ofw"]
 
 [ext_resource type="Script" uid="uid://dgcyemadch4gh" path="res://scripts/state_machine/player.gd" id="1_5vujh"]
 [ext_resource type="Script" uid="uid://bckml1lio3ey0" path="res://scripts/player/look_component.gd" id="2_5auh5"]
 [ext_resource type="Script" uid="uid://b02ba1ahb5ygd" path="res://scripts/state_machine/state_machine.gd" id="2_nspu6"]
 [ext_resource type="Script" uid="uid://cuta78dqfx10o" path="res://scripts/state_machine/states/idle.gd" id="3_5auh5"]
 [ext_resource type="Script" uid="uid://b2u4cdxaib52i" path="res://scripts/state_machine/states/walk.gd" id="4_r7e07"]
+[ext_resource type="Script" uid="uid://dsirb7ahvd6jr" path="res://scripts/state_machine/states/jump.gd" id="5_5auh5"]
 [ext_resource type="Script" uid="uid://dv1vqted167ej" path="res://scripts/player/player_move_component.gd" id="5_7pjku"]
+[ext_resource type="Script" uid="uid://br3ibrsypc7tu" path="res://scripts/state_machine/states/fall.gd" id="6_r7e07"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mh0fr"]
 resource_name = "Beta_Joints_MAT1"
@@ -3068,19 +3070,27 @@ shape = SubResource("CapsuleShape3D_m7jsh")
 script = ExtResource("2_nspu6")
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="movement_state_machine" node_paths=PackedStringArray("walk_state")]
+[node name="idle" type="Node" parent="movement_state_machine" node_paths=PackedStringArray("walk_state", "jump_state")]
 script = ExtResource("3_5auh5")
 walk_state = NodePath("../walk")
-animation_name = null
-walk_speed = null
-mouse_sensitivity = null
+jump_state = NodePath("../jump")
 
 [node name="walk" type="Node" parent="movement_state_machine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("4_r7e07")
 idle_state = NodePath("../idle")
-animation_name = null
-walk_speed = null
-mouse_sensitivity = null
+
+[node name="jump" type="Node" parent="movement_state_machine" node_paths=PackedStringArray("idle_state", "walk_state", "fall_state")]
+script = ExtResource("5_5auh5")
+idle_state = NodePath("../idle")
+walk_state = NodePath("../walk")
+fall_state = NodePath("../fall")
+metadata/_custom_type_script = "uid://0xhokixqbnio"
+
+[node name="fall" type="Node" parent="movement_state_machine" node_paths=PackedStringArray("idle_state", "walk_state")]
+script = ExtResource("6_r7e07")
+idle_state = NodePath("../idle")
+walk_state = NodePath("../walk")
+metadata/_custom_type_script = "uid://0xhokixqbnio"
 
 [node name="player_move_component" type="Node" parent="."]
 script = ExtResource("5_7pjku")

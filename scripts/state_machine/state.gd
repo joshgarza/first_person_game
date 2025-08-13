@@ -7,8 +7,10 @@ var animation_name: String
 var walk_speed: float = 10
 @export 
 var mouse_sensitivity: float = 0.1
+@export var speed: float = 4.2
+@export var air_acceleration: float = 0.0
 
-var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity: int = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var animations: AnimationPlayer
 var move_component: MoveComponent
@@ -16,7 +18,7 @@ var parent: CharacterBody3D
 
 func enter() -> void:
 	pass
-
+	
 func exit() -> void:
 	pass
 
