@@ -5,6 +5,8 @@ extends Node
 var animation_name: String
 @export
 var walk_speed: float = 10
+@export 
+var mouse_sensitivity: float = 0.1
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -28,7 +30,8 @@ func process_physics(delta: float) -> State:
 	return null
 
 func get_movement_input() -> Vector3:
-	return move_component.get_movement_direction()
+	var direction: Vector3 = move_component.get_movement_direction(parent)
+	return direction
 
 func get_jump() -> bool:
 	return move_component.wants_jump()

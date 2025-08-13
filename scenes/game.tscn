@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cbeevnr5lx51g"]
+[gd_scene load_steps=9 format=3 uid="uid://cbeevnr5lx51g"]
 
 [ext_resource type="Script" uid="uid://d3ic2htxagt3b" path="res://scripts/Food.gd" id="1_iywne"]
-[ext_resource type="PackedScene" uid="uid://cs6u1domd081j" path="res://scenes/DebugHUD.tscn" id="2_p57ef"]
 [ext_resource type="PackedScene" uid="uid://bci73u8so2kau" path="res://scenes/wall.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://b3buspk4gns62" path="res://scenes/obstacle.tscn" id="3_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://dqmght8uuxpxh" path="res://scenes/human.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dyt3j3fko8ofw" path="res://scenes/playerCharacter.tscn" id="5_iywne"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8cj0n"]
 size = Vector3(20, 1, 20)
@@ -47,19 +46,6 @@ transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 5.7429, 0, 4.40413)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.989313, 0.128001, -0.0698233, 0, 0.478876, 0.877883, 0.145807, 0.868501, -0.473758, 3.71371, 4.60486, -13.9319)
 
-[node name="DebugHud" parent="." groups=["hud"] instance=ExtResource("2_p57ef")]
-
-[node name="human" parent="." instance=ExtResource("4_lbhrr")]
-
-[node name="Camera3D" parent="human" index="0"]
-transform = Transform3D(-0.999195, 0, 0.0401143, 0.0278567, 0.719558, 0.693873, -0.0288646, 0.694432, -0.718979, 0, 1.60678, 0.138653)
-
-[node name="idle" parent="human/movement_state_machine" index="0" node_paths=PackedStringArray("walk_state")]
-walk_state = NodePath("../walk")
-
-[node name="walk" parent="human/movement_state_machine" index="1" node_paths=PackedStringArray("idle_state")]
-idle_state = NodePath("../idle")
-
 [node name="wall" parent="." instance=ExtResource("2_yqjtg")]
 transform = Transform3D(-0.0034906, 0, 0.999994, 0, 1, 0, -0.999994, 0, -0.0034906, 0, 0, 9.83362)
 
@@ -72,4 +58,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.72597, 0, 0)
 [node name="wall4" parent="." instance=ExtResource("2_yqjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.17592, 0, 0)
 
-[editable path="human"]
+[node name="playerCharacter" parent="." instance=ExtResource("5_iywne")]

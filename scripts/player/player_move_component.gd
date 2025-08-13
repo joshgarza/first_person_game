@@ -3,19 +3,20 @@ extends MoveComponent
 # Return the desired direction of movement for the character
 # in the range [-1, 1], where positive values indicate a desire
 # to move to the right and negative values to the left.
-func get_movement_direction() -> Vector3:
-	var direction: Vector3 = Vector3(0.0, 0.0, 0.0)
+func get_movement_direction(actor: CharacterBody3D) -> Vector3:
+	var direction: Vector3 = Vector3.ZERO
+	var cam_xform: Basis = actor.global_transform.basis
 
 	if Input.is_action_pressed("move_forward"):
-		direction += Vector3(0, 0, 1)
+		direction += cam_xform.z
 	if Input.is_action_pressed("move_back"):
-		direction -= Vector3(0, 0, 1)
+		direction -= cam_xform.z
 	if Input.is_action_pressed("move_left"):
-		direction += Vector3(1, 0, 0)
+		direction += cam_xform.x
 	if Input.is_action_pressed("move_right"):
-		direction -= Vector3(1, 0, 0)
+		direction -= cam_xform.x
 
-	return direction
+	return direction.normalized()
 
 # Return a boolean indicating if the character wants to jump
 func wants_jump() -> bool:

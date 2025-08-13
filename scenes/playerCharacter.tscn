@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=4 uid="uid://dqmght8uuxpxh"]
+[gd_scene load_steps=18 format=4 uid="uid://dyt3j3fko8ofw"]
 
-[ext_resource type="Script" uid="uid://b02ba1ahb5ygd" path="res://scripts/state_machine/state_machine.gd" id="1_4otcn"]
-[ext_resource type="Script" uid="uid://dgcyemadch4gh" path="res://scripts/state_machine/player.gd" id="1_mayv3"]
-[ext_resource type="Script" uid="uid://b2u4cdxaib52i" path="res://scripts/state_machine/states/walk.gd" id="2_mayv3"]
-[ext_resource type="Script" uid="uid://cuta78dqfx10o" path="res://scripts/state_machine/states/idle.gd" id="3_c7jhf"]
-[ext_resource type="Script" uid="uid://dv1vqted167ej" path="res://scripts/player/player_move_component.gd" id="3_denma"]
+[ext_resource type="Script" uid="uid://dgcyemadch4gh" path="res://scripts/state_machine/player.gd" id="1_5vujh"]
+[ext_resource type="Script" uid="uid://bckml1lio3ey0" path="res://scripts/player/look_component.gd" id="2_5auh5"]
+[ext_resource type="Script" uid="uid://b02ba1ahb5ygd" path="res://scripts/state_machine/state_machine.gd" id="2_nspu6"]
+[ext_resource type="Script" uid="uid://cuta78dqfx10o" path="res://scripts/state_machine/states/idle.gd" id="3_5auh5"]
+[ext_resource type="Script" uid="uid://b2u4cdxaib52i" path="res://scripts/state_machine/states/walk.gd" id="4_r7e07"]
+[ext_resource type="Script" uid="uid://dv1vqted167ej" path="res://scripts/player/player_move_component.gd" id="5_7pjku"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mh0fr"]
 resource_name = "Beta_Joints_MAT1"
@@ -2579,8 +2580,8 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m7jsh"]
 
-[node name="human" type="CharacterBody3D"]
-script = ExtResource("1_mayv3")
+[node name="playerCharacter" type="CharacterBody3D"]
+script = ExtResource("1_5vujh")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.999195, 0, 0.0401143, 0, 1, 0, -0.0401143, 0, -0.999195, 0, 1.60678, 0.138653)
@@ -3064,14 +3065,25 @@ transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.900647, 0)
 shape = SubResource("CapsuleShape3D_m7jsh")
 
 [node name="movement_state_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
-script = ExtResource("1_4otcn")
+script = ExtResource("2_nspu6")
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="movement_state_machine"]
-script = ExtResource("3_c7jhf")
+[node name="idle" type="Node" parent="movement_state_machine" node_paths=PackedStringArray("walk_state")]
+script = ExtResource("3_5auh5")
+walk_state = NodePath("../walk")
+animation_name = null
+walk_speed = null
+mouse_sensitivity = null
 
-[node name="walk" type="Node" parent="movement_state_machine"]
-script = ExtResource("2_mayv3")
+[node name="walk" type="Node" parent="movement_state_machine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("4_r7e07")
+idle_state = NodePath("../idle")
+animation_name = null
+walk_speed = null
+mouse_sensitivity = null
 
 [node name="player_move_component" type="Node" parent="."]
-script = ExtResource("3_denma")
+script = ExtResource("5_7pjku")
+
+[node name="look_component" type="Node" parent="."]
+script = ExtResource("2_5auh5")
